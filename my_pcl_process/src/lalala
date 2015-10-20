@@ -1,0 +1,22 @@
+  tf::TransformListener listener;
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
+  cloud->points.resize (msg->points.size());
+  
+   for (size_t i = 0; i < msg->points.size (); ++i){
+       //we'll create a point in the base_laser frame that we'd like to transform to the base_link frame
+      geometry_msgs::PointStamped laser_point;
+      laser_point.header.frame_id = "/map";
+      laser_point.header.stamp = ros::Time();
+      laser_point.point.x = msg->points[i].x;
+      laser_point.point.y = msg->points[i].y;
+      laser_point.point.z = msg->points[i].z;
+      
+      geometry_msgs::PointStamped base_point;
+      listener.transformPoint("/robot", laser_point, base_point);
+      
+      cloud->points[i].x = base_point.point.x;
+      cloud->points[i].y = base_point.point.y;
+      cloud->points[i].z = base_point.point.z;
+   }
+  

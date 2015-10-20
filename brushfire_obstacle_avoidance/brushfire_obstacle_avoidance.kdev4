@@ -1,0 +1,3 @@
+[Project]
+Manager=KDevCMakeManager
+Name=brushfire_obstacle_avoidance
