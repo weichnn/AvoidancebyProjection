@@ -4,3 +4,6 @@
   
   
   In simulation , I went through the free-running operation experiments to follow global path to generate local path that the quadrotor did. These experiments all had good results and help verify the algorithm that can deal with local planning issues. As for the time of the algorithm taking, which this paper introduces, is much less than standard RRT algorithm’s need in compalicate experiment.
+
+###platform
+ubuntu and ROS hydro
